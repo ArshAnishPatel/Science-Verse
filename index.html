@@ -6494,6 +6494,32 @@ function showClass(cls){
     }
   });
 }
-<script src='https://www.noupe.com/embed/019dd260784771068e2c835909edfd498b99.js'></script>
+<div id="chatbox" style="position:fixed;bottom:20px;right:20px;width:300px;background:#0d1b34;border:1px solid #1e3a5f;border-radius:10px;padding:10px;">
+  <div id="messages" style="height:200px;overflow-y:auto;font-size:14px;"></div>
+  <input id="userInput" placeholder="Ask something..." style="width:100%;padding:5px;margin-top:5px;">
+</div>
+
+<script>
+const messages = document.getElementById("messages");
+
+function addMessage(text, user=false){
+  const msg = document.createElement("div");
+  msg.textContent = (user ? "You: " : "AI: ") + text;
+  messages.appendChild(msg);
+}
+
+document.getElementById("userInput").addEventListener("keypress", function(e){
+  if(e.key === "Enter"){
+    let input = this.value;
+    addMessage(input, true);
+
+    // Simple fake AI response
+    let reply = "I am your Science AI 🤖. Ask about Physics, Chemistry, Biology!";
+    addMessage(reply);
+
+    this.value = "";
+  }
+});
+</script>
 </body>
 </html>
